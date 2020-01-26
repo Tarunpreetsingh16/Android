@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Inventory</string>
+    <string name="exploreInventory">See our inventory</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="addressLine">Address Line #</string>
+    <string name="apartmentNumber">Apartment #</string>
+    <string name="city">City</string>
+    <string name="province">Province</string>
+    <string name="postalCode">Postal Code</string>
+    <string name="cardNumber">Card Number</string>
+    <string name="cvvNumber">CVV</string>
+    <string name="expiryDate">Expiry Date (MMYY)</string>
+    <string name="cardHolder">Cardholder Name</string>
+    <string name="savedAddresses">Saved Addresses</string>
+    <string name="savedCards">Saved Cards</string>
+    <string name="checkout">Checkout</string>
+    <string name="cardDetails">Card Details</string>
+    <string name="shippingDetails">Shipping Details</string>
+</resources>
