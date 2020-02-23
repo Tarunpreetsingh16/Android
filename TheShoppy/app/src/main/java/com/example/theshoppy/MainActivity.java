@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout peripheralsDesktop;
     LinearLayout peripheralsLaptop;
     TextView txtPeripherals;
+    Button btnCalculate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
