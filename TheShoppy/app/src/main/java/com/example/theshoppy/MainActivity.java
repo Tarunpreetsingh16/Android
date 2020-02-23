@@ -7,23 +7,22 @@ import androidx.cardview.widget.CardView;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,6 +42,17 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout peripheralsLaptop;
     TextView txtPeripherals;
     Button btnCalculate;
+    CheckBox chkSSD;
+    CheckBox chkPrinter;
+    RadioButton radioBtnCoolingPad;
+    RadioButton radioBtnUSB;
+    RadioButton radioBtnStand;
+    RadioButton radioBtnWebcam;
+    RadioButton radioBtnExternalHD;
+    EditText editName;
+    TextView txtInvoice;
+    List<String> provinces;
+    CardView cardInvoice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +74,128 @@ public class MainActivity extends AppCompatActivity {
         setUpComputerType();
         //set up spinner functionality
         setUpBrandSpinner();
+        //set up cost calculation using a button
+        setUpCalculation();
+    }
+
+    private void setUpCalculation() {
+        //add listener to the button to start calculating the price
+        btnCalculate.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+
+                //clear old invoice data
+                clearInvoice();
+
+                String name = editName.getText().toString().trim();
+                String province = editProvince.getText().toString().trim();
+
+                //check if user has entered the data
+                if( name.isEmpty() ||
+                    province.isEmpty()){
+                    //give feedback to the user
+                    Toast.makeText(MainActivity.this,"Fill out the name and province first",Toast.LENGTH_LONG).show();
+                }
+                else if(!provinces.contains(province)){
+                    //give feedback to the user
+                    Toast.makeText(MainActivity.this,"Choose correct province",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    //add config to invoice
+                    addToInvoice();
+                    //show invoice card
+                    cardInvoice.setVisibility(View.VISIBLE);
+                    //print invoice
+                    Invoice.printInvoice(name,
+                            province,
+                            editDate.getText().toString(),
+                            (radioBtnDesktop.isChecked()?"Desktop":"Laptop"), txtInvoice);
+                }
+            }
+        });
+    }
+
+    private void clearInvoice(){
+        //clear the text view
+        txtInvoice.setText("");
+        //hide the card
+        cardInvoice.setVisibility(View.GONE);
+        Invoice.clear();
+    }
+
+    private void addToInvoice(){
+        //initialize products list with prices
+        Products.initializeProducts(MainActivity.this);
+        //check if desktop is selected
+        if(radioBtnDesktop.isChecked()){
+            //check brand of the desktop
+
+            checkAddBrand(R.string.desktops);
+        }
+        else if(radioBtnLaptop.isChecked()){ //laptop is checked
+            //check brand of laptop
+            checkAddBrand(R.string.laptops);
+        }
+
+        //check for add ons
+        if(chkSSD.isChecked()){
+            Invoice.addItem("Additional",getString(R.string.ssd),Products.getPrice(getString(R.string.ssd)));
+        }
+        if(chkPrinter.isChecked()){
+            Invoice.addItem("Additional",getString(R.string.printer),Products.getPrice(getString(R.string.printer)));
+        }
+        //check for added peripherals of Desktop
+        if(radioBtnWebcam.isChecked()){
+            Invoice.addItem("Added Peripherals",getString(R.string.webcam),Products.getPrice(getString(R.string.webcam)));
+        }
+        else if(radioBtnExternalHD.isChecked()){
+            Invoice.addItem("Added Peripherals",getString(R.string.hard_drive),Products.getPrice(getString(R.string.hard_drive)));
+        }
+        //check for added peripherals of Laptops
+        if(radioBtnCoolingPad.isChecked()){
+            Invoice.addItem("Added Peripherals",getString(R.string.cooling_mat),Products.getPrice(getString(R.string.cooling_mat)));
+        }
+        else if(radioBtnUSB.isChecked()){
+            Invoice.addItem("Added Peripherals",getString(R.string.usb),Products.getPrice(getString(R.string.usb)));
+        }
+        else if(radioBtnStand.isChecked()){
+            Invoice.addItem("Added Peripherals",getString(R.string.laptop_stand),Products.getPrice(getString(R.string.laptop_stand)));
+        }
+    }
+
+    private void checkAddBrand(int check){
+        if(check == R.string.desktops){
+            //check the brand of desktop
+            if(spinnerBrand.getSelectedItem().toString() == getString(R.string.dell)){
+                //get the price and add to the list
+                Invoice.addItem("Brand",getString(R.string.dell),Products.getPrice(getString(R.string.dell_desktop)));
+            }
+            else if(spinnerBrand.getSelectedItem().toString() == getString(R.string.hp)){
+                //get the price and add to the list
+                Invoice.addItem("Brand",getString(R.string.hp),Products.getPrice(getString(R.string.hp_desktop)));
+            }
+            else if(spinnerBrand.getSelectedItem().toString() == getString(R.string.lenova)){
+                //get the price and add to the list
+                Invoice.addItem("Brand",getString(R.string.lenova),Products.getPrice(getString(R.string.lenova_desktop)));
+            }
+        }
+        else{
+            //check the brand of the laptop
+            if(spinnerBrand.getSelectedItem().toString() == getString(R.string.dell)){
+                //get the price and add to the list
+                Invoice.addItem("Brand",getString(R.string.dell),Products.getPrice(getString(R.string.dell_laptop)));
+            }
+            else if(spinnerBrand.getSelectedItem().toString() == getString(R.string.hp)){
+                //get the price and add to the list
+                Invoice.addItem("Brand",getString(R.string.hp),Products.getPrice(getString(R.string.hp_laptop)));
+            }
+            else if(spinnerBrand.getSelectedItem().toString() == getString(R.string.lenova)){
+                //get the price and add to the list
+                Invoice.addItem("Brand",getString(R.string.lenova),Products.getPrice(getString(R.string.lenova_laptop)));
+            }
+        }
+
     }
 
     private void setUpBrandSpinner() {
@@ -93,6 +225,18 @@ public class MainActivity extends AppCompatActivity {
         peripheralsDesktop = findViewById(R.id.peripheralsDesktop);
         peripheralsLaptop = findViewById(R.id.peripheralsLaptop);
         txtPeripherals = findViewById(R.id.txtPeripherals);
+        btnCalculate = findViewById(R.id.btnCalculate);
+        chkSSD = findViewById(R.id.chkSSD);
+        chkPrinter = findViewById(R.id.chkPrinter);
+        radioBtnCoolingPad = findViewById(R.id.radioBtnCoolingPad);
+        radioBtnExternalHD = findViewById(R.id.radioBtnExternalHD);
+        radioBtnStand = findViewById(R.id.radioBtnStand);
+        radioBtnUSB = findViewById(R.id.radioBtnUSB);
+        radioBtnWebcam = findViewById(R.id.radioBtnWebcam);
+        editName = findViewById(R.id.editName);
+        txtInvoice = findViewById(R.id.txtInvoice);
+        cardInvoice = findViewById(R.id.cardInvoice);
+        provinces = new ArrayList<>();
     }
 
     private void setUpComputerType() {
@@ -109,6 +253,10 @@ public class MainActivity extends AppCompatActivity {
                     peripheralsDesktop.setVisibility(View.VISIBLE);
                     peripheralsLaptop.setVisibility(View.GONE);
                     txtPeripherals.setVisibility(View.VISIBLE);
+                    //uncheck the additional peripherals of other computer type
+                    radioBtnCoolingPad.setChecked(false);
+                    radioBtnUSB.setChecked(false);
+                    radioBtnStand.setChecked(false);
                 }
                 else{
                     //if laptop is chosen then hide some UI elements and some visible
@@ -117,6 +265,10 @@ public class MainActivity extends AppCompatActivity {
                     peripheralsDesktop.setVisibility(View.GONE);
                     peripheralsLaptop.setVisibility(View.VISIBLE);
                     txtPeripherals.setVisibility(View.VISIBLE);
+
+                    //uncheck the additional peripherals of other computer type
+                    radioBtnWebcam.setChecked(false);
+                    radioBtnExternalHD.setChecked(false);
                 }
             }
         });
@@ -125,7 +277,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupAutoComplete() {
         //create List of provinces in Canada
-        List<String> provinces = new ArrayList<>();
         provinces.add("Alberta");
         provinces.add("British Columbia");
         provinces.add("Manitoba");

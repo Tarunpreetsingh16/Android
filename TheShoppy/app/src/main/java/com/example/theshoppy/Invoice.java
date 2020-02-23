@@ -1,7 +1,7 @@
 package com.example.theshoppy;
 
-import android.view.View;
-import android.widget.EditText;
+import android.util.Log;
+import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,14 +32,20 @@ public class Invoice {
         //add to the total cost of the products checked
         totalCost += price;
     }
+    public static void clear(){
+        customization.clear();
+        totalCost = 0;
+    }
 
     //print Invoice to the activity/ show to the user
-    public static void printInvoice(String customerName, String province, String purchaseDate,EditText txtInvoice){
+    public static void printInvoice(String customerName, String province,
+                                    String purchaseDate, String computerType,TextView txtInvoice){
         StringBuilder invoiceData = new StringBuilder();
         //append header data to the invoiceData
         invoiceData.append("Customer : " + customerName + "\n\n");
-        invoiceData.append("Province: " + province+ "\n\n");
-        invoiceData.append("Date of Purchase: " + purchaseDate + "\n\n");
+        invoiceData.append("Province : " + province+ "\n\n");
+        invoiceData.append("Date of Purchase  " + purchaseDate + "\n\n");
+        invoiceData.append("Computer : " + computerType + "\n\n");
         //create iterator to loop over the customizations
         Iterator iterator = customization.entrySet().iterator();
 
@@ -51,13 +57,15 @@ public class Invoice {
 
         //at last append the totalPrice including taxes
         //calculate taxes
-        float tax = calculateTax();
-        float finalCost = totalCost + tax;
-
+        double tax = calculateTax();
+        double finalCost = totalCost + tax;
+        //final cost with tax
+        finalCost = Math.round(finalCost * 100.0)/100.0;
         invoiceData.append("Cost : $" + finalCost);
+        txtInvoice.setText(invoiceData);
     }
     //calculate the taxes
-    private static float calculateTax(){
-        return (totalCost * 13)/100;
+    private static double calculateTax(){
+        return ((double)totalCost * 0.13);
     }
 }

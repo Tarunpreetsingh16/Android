@@ -1,6 +1,22 @@
 <resources>
     <string name="app_name">TheShoppy</string>
+    <string name="desktops">Desktops</string>
+    <string name="laptops">Laptops</string>
     <string name="dell">Dell</string>
     <string name="hp">HP</string>
     <string name="lenova">Lenova</string>
+    <string name="dell_laptop">Dell_Laptop</string>
+    <string name="hp_laptop">HP_Laptop</string>
+    <string name="lenova_laptop">Lenova_Laptop</string>
+    <string name="dell_desktop">Dell_Desktop</string>
+    <string name="hp_desktop">HP_Desktop</string>
+    <string name="lenova_desktop">Lenova_Desktop</string>
+    <string name="ssd">SSD</string>
+    <string name="printer">Printer</string>
+    <string name="cooling_mat">Cooling Mat</string>
+    <string name="usb">USB C-HUB</string>
+    <string name="laptop_stand">Laptop Stand</string>
+    <string name="webcam">Webcam</string>
+    <string name="hard_drive">External Hard Drive</string>
+
 </resources>
