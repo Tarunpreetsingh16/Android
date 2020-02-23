@@ -14,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     RadioButton radioBtnLaptop;
     CardView cardDesktops;
     CardView cardLaptops;
+    Spinner spinnerBrand;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +52,22 @@ public class MainActivity extends AppCompatActivity {
         setupAutoComplete();
         //set the listener on computer type
         setUpComputerType();
+        //set up spinner functionality
+        setUpBrandSpinner();
 
+    }
+
+    private void setUpBrandSpinner() {
+        //create list of brands
+        List<String> brands = new ArrayList<>();
+        brands.add(getString(R.string.dell));
+        brands.add(getString(R.string.hp));
+        brands.add(getString(R.string.lenova));
+        //create adapter for spinner
+        ArrayAdapter<String> brandsAdapter =
+                new ArrayAdapter<String>(this,R.layout.spinner_text,brands);
+        //set the adapter for thr provinces editText
+        spinnerBrand.setAdapter(brandsAdapter);
     }
 
     private void initializeVariables() {
@@ -63,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         radioBtnLaptop = findViewById(R.id.radioBtnLaptop);
         cardDesktops = findViewById(R.id.cardDesktops);
         cardLaptops = findViewById(R.id.cardLaptops);
+        spinnerBrand = findViewById(R.id.spinnerBrand);
     }
 
     private void setUpComputerType() {

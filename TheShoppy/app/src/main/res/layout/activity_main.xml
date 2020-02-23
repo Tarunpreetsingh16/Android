@@ -219,6 +219,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardDesktops"
+                android:fillViewport="true"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -258,7 +259,7 @@
                             android:background="@color/colorPrimary"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Dell"
+                            android:text="@string/dell"
                             android:textColor="@android:color/white"
                             android:textStyle="bold" />
 
@@ -275,7 +276,7 @@
                             android:background="@color/colorPrimary"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Hp"
+                            android:text="@string/hp"
                             android:textColor="@android:color/white"
                             android:textStyle="bold" />
 
@@ -293,7 +294,7 @@
                             android:background="@color/colorPrimary"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Lenova"
+                            android:text="@string/lenova"
                             android:textColor="@android:color/white"
                             android:textStyle="bold" />
 
@@ -322,7 +323,8 @@
 
                 <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="400dp">
+                    android:layout_height="400dp"
+                    android:fillViewport="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -350,7 +352,7 @@
                             android:background="@color/colorPrimary"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Dell"
+                            android:text="@string/dell"
                             android:textColor="@android:color/white"
                             android:textStyle="bold" />
 
@@ -367,7 +369,7 @@
                             android:background="@color/colorPrimary"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Hp"
+                            android:text="@string/hp"
                             android:textColor="@android:color/white"
                             android:textStyle="bold" />
 
@@ -385,7 +387,7 @@
                             android:background="@color/colorPrimary"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Lenova"
+                            android:text="@string/lenova"
                             android:textColor="@android:color/white"
                             android:textStyle="bold" />
 
@@ -400,6 +402,105 @@
                 </ScrollView>
 
             </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardComputerDetails"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="50dp"
+                android:visibility="visible"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/txtAssembleLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimaryDark"
+                        android:fontFamily="@font/cambay"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Assemble"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorPrimary"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/txtBrand"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/cambay"
+                            android:gravity="center"
+                            android:text="Brand"
+                            android:textColor="@android:color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/spinnerBrand"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:backgroundTint="#ffffff"
+                            android:fontFamily="@font/cambay"
+                            android:textSize="16sp"
+                            android:paddingLeft="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txtAddOn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/cambay"
+                        android:text="Add On"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="5dp"
+                        android:gravity="center|left"/>
+
+                    <CheckBox
+                        android:id="@+id/chkSSD"
+                        android:layout_width="match_parent"
+                        android:alpha="0.5"
+                        android:layout_height="wrap_content"
+                        android:text="SSD"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <CheckBox
+                        android:id="@+id/chkPrinter"
+                        android:alpha="0.5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Printer"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
