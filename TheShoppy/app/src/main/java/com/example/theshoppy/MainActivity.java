@@ -167,30 +167,30 @@ public class MainActivity extends AppCompatActivity {
     private void checkAddBrand(int check){
         if(check == R.string.desktops){
             //check the brand of desktop
-            if(spinnerBrand.getSelectedItem().toString() == getString(R.string.dell)){
+            if(spinnerBrand.getSelectedItem().toString().split("-")[0].equals(getString(R.string.dell))){
                 //get the price and add to the list
                 Invoice.addItem("Brand",getString(R.string.dell),Products.getPrice(getString(R.string.dell_desktop)));
             }
-            else if(spinnerBrand.getSelectedItem().toString() == getString(R.string.hp)){
+            else if(spinnerBrand.getSelectedItem().toString().split("-")[0].equals(getString(R.string.hp))){
                 //get the price and add to the list
                 Invoice.addItem("Brand",getString(R.string.hp),Products.getPrice(getString(R.string.hp_desktop)));
             }
-            else if(spinnerBrand.getSelectedItem().toString() == getString(R.string.lenova)){
+            else if(spinnerBrand.getSelectedItem().toString().split("-")[0].equals(getString(R.string.lenova))){
                 //get the price and add to the list
                 Invoice.addItem("Brand",getString(R.string.lenova),Products.getPrice(getString(R.string.lenova_desktop)));
             }
         }
         else{
             //check the brand of the laptop
-            if(spinnerBrand.getSelectedItem().toString() == getString(R.string.dell)){
+            if(spinnerBrand.getSelectedItem().toString().split("-")[0].equals(getString(R.string.dell))){
                 //get the price and add to the list
                 Invoice.addItem("Brand",getString(R.string.dell),Products.getPrice(getString(R.string.dell_laptop)));
             }
-            else if(spinnerBrand.getSelectedItem().toString() == getString(R.string.hp)){
+            else if(spinnerBrand.getSelectedItem().toString().split("-")[0].equals(getString(R.string.hp))){
                 //get the price and add to the list
-                Invoice.addItem("Brand",getString(R.string.hp),Products.getPrice(getString(R.string.hp_laptop)));
+                Invoice.addItem("Brand",getString(R.string.hp).split("-")[0],Products.getPrice(getString(R.string.hp_laptop)));
             }
-            else if(spinnerBrand.getSelectedItem().toString() == getString(R.string.lenova)){
+            else if(spinnerBrand.getSelectedItem().toString().split("-")[0].equals(getString(R.string.lenova))){
                 //get the price and add to the list
                 Invoice.addItem("Brand",getString(R.string.lenova),Products.getPrice(getString(R.string.lenova_laptop)));
             }
@@ -201,9 +201,9 @@ public class MainActivity extends AppCompatActivity {
     private void setUpBrandSpinner() {
         //create list of brands
         List<String> brands = new ArrayList<>();
-        brands.add(getString(R.string.dell));
-        brands.add(getString(R.string.hp));
-        brands.add(getString(R.string.lenova));
+        brands.add(getString(R.string.dell) + "- $" + (radioBtnDesktop.isChecked()?475:1249));
+        brands.add(getString(R.string.hp) + "- $" + (radioBtnDesktop.isChecked()?400:1150));
+        brands.add(getString(R.string.lenova) + "- $" + (radioBtnDesktop.isChecked()?450:1549));
         //create adapter for spinner
         ArrayAdapter<String> brandsAdapter =
                 new ArrayAdapter<String>(this,R.layout.spinner_text,brands);
@@ -257,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
                     radioBtnCoolingPad.setChecked(false);
                     radioBtnUSB.setChecked(false);
                     radioBtnStand.setChecked(false);
+                    setUpBrandSpinner();
                 }
                 else{
                     //if laptop is chosen then hide some UI elements and some visible
@@ -265,6 +266,7 @@ public class MainActivity extends AppCompatActivity {
                     peripheralsDesktop.setVisibility(View.GONE);
                     peripheralsLaptop.setVisibility(View.VISIBLE);
                     txtPeripherals.setVisibility(View.VISIBLE);
+                    setUpBrandSpinner();
 
                     //uncheck the additional peripherals of other computer type
                     radioBtnWebcam.setChecked(false);

@@ -25,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
+                android:visibility="visible"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="10dp">
 
@@ -493,23 +494,62 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
-                    <CheckBox
-                        android:id="@+id/chkSSD"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:alpha="0.5"
-                        android:fontFamily="@font/cambay"
-                        android:text="@string/ssd"
-                        android:textSize="16sp" />
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
-                    <CheckBox
-                        android:id="@+id/chkPrinter"
+                        <CheckBox
+                            android:id="@+id/chkSSD"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.9"
+                            android:alpha="0.5"
+                            android:fontFamily="@font/cambay"
+                            android:text="@string/ssd"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/txtSSDPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.1"
+                            android:fontFamily="@font/cambay"
+                            android:gravity="center"
+                            android:text="$60"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:visibility="visible" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:alpha="0.5"
-                        android:fontFamily="@font/cambay"
-                        android:text="@string/printer"
-                        android:textSize="16sp" />
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <CheckBox
+                            android:id="@+id/chkPrinter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.9"
+                            android:alpha="0.5"
+                            android:fontFamily="@font/cambay"
+                            android:text="@string/printer"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/txtPrinterPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.1"
+                            android:fontFamily="@font/cambay"
+                            android:gravity="center"
+                            android:text="$100"
+                            android:textColor="@android:color/black"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/txtPeripherals"
@@ -531,8 +571,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:visibility="gone"
-                        tools:visibility="gone">
+                        android:visibility="gone">
 
                         <RadioGroup
                             android:id="@+id/radioGrpLaptopPeripherals"
@@ -540,32 +579,87 @@
                             android:layout_height="match_parent"
                             android:orientation="vertical">
 
-                            <RadioButton
-                                android:id="@+id/radioBtnCoolingPad"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:alpha="0.5"
-                                android:fontFamily="@font/cambay"
-                                android:text="@string/cooling_mat"
-                                android:textSize="16sp" />
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
 
-                            <RadioButton
-                                android:id="@+id/radioBtnUSB"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:alpha="0.5"
-                                android:fontFamily="@font/cambay"
-                                android:text="@string/usb"
-                                android:textSize="16sp" />
+                                <RadioButton
+                                    android:id="@+id/radioBtnCoolingPad"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.9"
+                                    android:alpha="0.5"
+                                    android:fontFamily="@font/cambay"
+                                    android:text="@string/cooling_mat"
+                                    android:textSize="16sp" />
 
-                            <RadioButton
-                                android:id="@+id/radioBtnStand"
+                                <TextView
+                                    android:id="@+id/txtMatPrice"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.1"
+                                    android:fontFamily="@font/cambay"
+                                    android:text="$33"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:alpha="0.5"
-                                android:fontFamily="@font/cambay"
-                                android:text="@string/laptop_stand"
-                                android:textSize="16sp" />
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/radioBtnUSB"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.9"
+                                    android:alpha="0.5"
+                                    android:fontFamily="@font/cambay"
+                                    android:text="@string/usb"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/txtUSBPrice"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.1"
+                                    android:fontFamily="@font/cambay"
+                                    android:text="$60"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/radioBtnStand"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.9"
+                                    android:alpha="0.5"
+                                    android:fontFamily="@font/cambay"
+                                    android:text="@string/laptop_stand"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/txtStandPrice"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.1"
+                                    android:fontFamily="@font/cambay"
+                                    android:text="$139"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
                         </RadioGroup>
                     </LinearLayout>
 
@@ -574,8 +668,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:visibility="visible"
-                        tools:visibility="visible">
+                        android:visibility="visible">
 
                         <RadioGroup
                             android:id="@+id/radioGrpDesktopPeripherals"
@@ -583,23 +676,61 @@
                             android:layout_height="match_parent"
                             android:orientation="vertical">
 
-                            <RadioButton
-                                android:id="@+id/radioBtnWebcam"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:alpha="0.5"
-                                android:fontFamily="@font/cambay"
-                                android:text="@string/webcam"
-                                android:textSize="16sp" />
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
 
-                            <RadioButton
-                                android:id="@+id/radioBtnExternalHD"
+                                <RadioButton
+                                    android:id="@+id/radioBtnWebcam"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.9"
+                                    android:alpha="0.5"
+                                    android:fontFamily="@font/cambay"
+                                    android:text="@string/webcam"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/txtWebcamPrice"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.1"
+                                    android:fontFamily="@font/cambay"
+                                    android:gravity="center"
+                                    android:text="$95"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:alpha="0.5"
-                                android:fontFamily="@font/cambay"
-                                android:text="@string/hard_drive"
-                                android:textSize="16sp" />
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <RadioButton
+                                    android:id="@+id/radioBtnExternalHD"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.9"
+                                    android:alpha="0.5"
+                                    android:fontFamily="@font/cambay"
+                                    android:text="@string/hard_drive"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/txtHDPrice"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.1"
+                                    android:fontFamily="@font/cambay"
+                                    android:gravity="center"
+                                    android:text="$64"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
 
                             <RadioButton
                                 android:id="@+id/radioBtnNone"
