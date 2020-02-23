@@ -44,6 +44,7 @@
                             android:id="@+id/txtName"
                             android:layout_width="100dp"
                             android:layout_height="match_parent"
+                            android:alpha="0.67"
                             android:background="@color/colorPrimary"
                             android:fontFamily="@font/cambay"
                             android:gravity="center"
@@ -80,6 +81,7 @@
                             android:layout_width="100dp"
                             android:layout_height="match_parent"
                             android:layout_weight="0"
+                            android:alpha="0.67"
                             android:background="@color/colorPrimary"
                             android:fontFamily="@font/cambay"
                             android:gravity="center"
@@ -117,6 +119,7 @@
                             android:layout_width="100dp"
                             android:layout_height="match_parent"
                             android:layout_weight="0"
+                            android:alpha="0.67"
                             android:background="@color/colorPrimary"
                             android:fontFamily="@font/cambay"
                             android:gravity="center"
@@ -146,6 +149,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginLeft="20dp"
                             android:layout_weight="0.8"
+                            android:alpha="0.67"
                             android:background="@drawable/border_effect"
                             android:backgroundTint="@color/colorAccent"
                             android:fontFamily="@font/cambay"
@@ -165,6 +169,7 @@
                             android:id="@+id/txtComputerType"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:alpha="0.80"
                             android:background="@color/colorPrimaryDark"
                             android:fontFamily="@font/cambay"
                             android:gravity="center"
@@ -178,6 +183,7 @@
                             android:id="@+id/radioGrpType"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:alpha="0.67"
                             android:background="@drawable/depth_effect_3sides"
                             android:backgroundTint="@color/colorPrimary"
                             android:orientation="horizontal"
@@ -230,6 +236,7 @@
                 app:cardElevation="10dp">
 
                 <ScrollView
+                    android:id="@+id/desktopsScroll"
                     android:layout_width="match_parent"
                     android:layout_height="400dp">
 
@@ -322,6 +329,7 @@
                 app:cardElevation="10dp">
 
                 <ScrollView
+                    android:id="@+id/laptopsScroll"
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
                     android:fillViewport="true">
@@ -415,6 +423,7 @@
                 app:cardElevation="10dp">
 
                 <LinearLayout
+                    android:id="@+id/additionalDetails"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -424,18 +433,21 @@
                         android:id="@+id/txtAssembleLabel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:alpha="0.8"
                         android:background="@color/colorPrimaryDark"
                         android:fontFamily="@font/cambay"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:text="Assemble"
+                        android:text="Additional"
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <LinearLayout
+                        android:id="@+id/brandList"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:alpha="0.67"
                         android:background="@color/colorPrimary"
                         android:orientation="horizontal"
                         android:padding="10dp">
@@ -455,12 +467,12 @@
                             android:id="@+id/spinnerBrand"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
                             android:layout_weight="1"
                             android:backgroundTint="#ffffff"
                             android:fontFamily="@font/cambay"
-                            android:textSize="16sp"
                             android:paddingLeft="5dp"
-                            android:layout_marginLeft="5dp"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -469,37 +481,161 @@
                         android:id="@+id/txtAddOn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:fontFamily="@font/cambay"
+                        android:gravity="center|left"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="5dp"
                         android:text="Add On"
                         android:textColor="@android:color/black"
                         android:textColorHint="@android:color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="5dp"
-                        android:gravity="center|left"/>
+                        android:textStyle="bold" />
 
                     <CheckBox
                         android:id="@+id/chkSSD"
                         android:layout_width="match_parent"
-                        android:alpha="0.5"
                         android:layout_height="wrap_content"
+                        android:alpha="0.5"
                         android:text="SSD"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textSize="16sp" />
 
                     <CheckBox
                         android:id="@+id/chkPrinter"
-                        android:alpha="0.5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:alpha="0.5"
                         android:text="Printer"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/txtPeripherals"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/cambay"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="5dp"
+                        android:text="Other Peripherals"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        tools:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/peripheralsLaptop"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        tools:visibility="gone">
+
+                        <RadioGroup
+                            android:id="@+id/radioGrpLaptopPeripherals"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radioBtnCoolingPad"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:alpha="0.5"
+                                android:fontFamily="@font/cambay"
+                                android:text="Laptop Cooling Mat"
+                                android:textSize="16sp" />
+
+                            <RadioButton
+                                android:id="@+id/radioBtnUSB"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:alpha="0.5"
+                                android:fontFamily="@font/cambay"
+                                android:text="USB C-HUB"
+                                android:textSize="16sp" />
+
+                            <RadioButton
+                                android:id="@+id/radioBtnStand"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:alpha="0.5"
+                                android:fontFamily="@font/cambay"
+                                android:text="Laptop Stand"
+                                android:textSize="16sp" />
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/peripheralsDesktop"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        tools:visibility="gone">
+
+                        <RadioGroup
+                            android:id="@+id/radioGrpDesktopPeripherals"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radioBtnWebcam"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:alpha="0.5"
+                                android:fontFamily="@font/cambay"
+                                android:text="Webcam"
+                                android:textSize="16sp" />
+
+                            <RadioButton
+                                android:id="@+id/radioBtnExternalHD"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:alpha="0.5"
+                                android:fontFamily="@font/cambay"
+                                android:text="External Hard Drive"
+                                android:textSize="16sp" />
+
+                            <RadioButton
+                                android:id="@+id/radioBtnNone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:alpha="0.5"
+                                android:fontFamily="@font/cambay"
+                                android:text="None"
+                                android:textSize="16sp" />
+                        </RadioGroup>
+                    </LinearLayout>
 
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/btnCalculate"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/border_effect"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:text="Button"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+
+            <EditText
+                android:id="@+id/txtInvoice"
+                android:layout_width="350dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"/>
 
         </LinearLayout>
     </ScrollView>

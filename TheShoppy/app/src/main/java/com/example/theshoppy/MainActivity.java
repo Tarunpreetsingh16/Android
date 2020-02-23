@@ -6,15 +6,20 @@ import androidx.cardview.widget.CardView;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,13 +39,17 @@ public class MainActivity extends AppCompatActivity {
     CardView cardDesktops;
     CardView cardLaptops;
     Spinner spinnerBrand;
+    LinearLayout peripheralsDesktop;
+    LinearLayout peripheralsLaptop;
+    TextView txtPeripherals;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUp();
     }
-    private void setUp(){
+    private void setUp() {
         //set the app bar to the custom
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         //attach the custom view to the main_activity for the app label
@@ -54,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         setUpComputerType();
         //set up spinner functionality
         setUpBrandSpinner();
-
     }
 
     private void setUpBrandSpinner() {
@@ -81,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
         cardDesktops = findViewById(R.id.cardDesktops);
         cardLaptops = findViewById(R.id.cardLaptops);
         spinnerBrand = findViewById(R.id.spinnerBrand);
+        peripheralsDesktop = findViewById(R.id.peripheralsDesktop);
+        peripheralsLaptop = findViewById(R.id.peripheralsLaptop);
+        txtPeripherals = findViewById(R.id.txtPeripherals);
     }
 
     private void setUpComputerType() {
@@ -91,14 +102,20 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 //check which radio button is checked
                 if(radioBtnDesktop.isChecked()){
-                    //if desktop is chosen then hide laptop cardview and make desktop visible
+                    //if desktop is chosen then hide some UI elements and some visible
                     cardLaptops.setVisibility(View.GONE);
                     cardDesktops.setVisibility(View.VISIBLE);
+                    peripheralsDesktop.setVisibility(View.VISIBLE);
+                    peripheralsLaptop.setVisibility(View.GONE);
+                    txtPeripherals.setVisibility(View.VISIBLE);
                 }
                 else{
-                    //if laptop is chosen then hide desktop cardview and make laptops visible
+                    //if laptop is chosen then hide some UI elements and some visible
                     cardDesktops.setVisibility(View.GONE);
                     cardLaptops.setVisibility(View.VISIBLE);
+                    peripheralsDesktop.setVisibility(View.GONE);
+                    peripheralsLaptop.setVisibility(View.VISIBLE);
+                    txtPeripherals.setVisibility(View.VISIBLE);
                 }
             }
         });
