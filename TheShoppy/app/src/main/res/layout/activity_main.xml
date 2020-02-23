@@ -20,6 +20,7 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardHeader"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -94,6 +95,7 @@
                             android:layout_weight="1"
                             android:alpha=".50"
                             android:background="@drawable/depth_effect"
+                            android:completionThreshold="2"
                             android:ems="10"
                             android:fontFamily="@font/cambay"
                             android:gravity="center_horizontal|left|center_vertical"
@@ -101,8 +103,7 @@
                             android:inputType="textAutoComplete"
                             android:padding="10dp"
                             android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:completionThreshold="2"/>
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -143,14 +144,71 @@
                             android:id="@+id/btnChooseDate"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
                             android:layout_weight="0.8"
                             android:background="@drawable/border_effect"
                             android:backgroundTint="@color/colorAccent"
                             android:fontFamily="@font/cambay"
+                            android:gravity="center"
                             android:text="Choose Date"
-                            android:textColor="@android:color/white"
-                            android:layout_marginLeft="20dp"
-                            android:gravity="center"/>
+                            android:textColor="@android:color/white" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/txtComputerType"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimaryDark"
+                            android:fontFamily="@font/cambay"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="Computer Type"
+                            android:textColor="#ffffff"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <RadioGroup
+                            android:id="@+id/radioGrpType"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/depth_effect_3sides"
+                            android:backgroundTint="@color/colorPrimary"
+                            android:orientation="horizontal"
+                            android:padding="10dp">
+
+                            <RadioButton
+                                android:id="@+id/radioBtnDesktop"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:backgroundTint="#BDB3B3"
+                                android:buttonTint="@android:color/white"
+                                android:fontFamily="@font/cambay"
+                                android:text="Desktop"
+                                android:textColor="@android:color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <RadioButton
+                                android:id="@+id/radioBtnLaptop"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:backgroundTint="#BDB3B3"
+                                android:buttonTint="@android:color/white"
+                                android:fontFamily="@font/cambay"
+                                android:text="Laptop"
+                                android:textColor="@android:color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </RadioGroup>
 
                     </LinearLayout>
 
@@ -159,6 +217,189 @@
 
             </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardDesktops"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="50dp"
+                android:visibility="gone"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/txtDesktopLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimaryDark"
+                            android:fontFamily="@font/cambay"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="Desktop Showcase"
+                            android:textColor="@android:color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtDellDesktop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimary"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="Dell"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/imgDellDesktop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/dell_desktop" />
+
+                        <TextView
+                            android:id="@+id/txtHpDesktop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimary"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="Hp"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/imgHpDesktop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/hp_desktop" />
+
+
+                        <TextView
+                            android:id="@+id/txtLenovoDesktop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimary"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="Lenova"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/imgLenovoDesktop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            app:srcCompat="@drawable/lenovo_desktop" />
+
+                    </LinearLayout>
+                </ScrollView>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardLaptops"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="50dp"
+                android:visibility="gone"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/txtLaptopLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimaryDark"
+                            android:fontFamily="@font/cambay"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="Laptop Showcase"
+                            android:textColor="@android:color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtDellLaptop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimary"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="Dell"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/imgDellLaptop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/dell_laptop" />
+
+                        <TextView
+                            android:id="@+id/txtHpLaptop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimary"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="Hp"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/imgHpLaptop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/hp_laptop" />
+
+
+                        <TextView
+                            android:id="@+id/txtLenovoLaptop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimary"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="Lenova"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/imgLenovoLaptop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            app:srcCompat="@drawable/lenovo_laptop" />
+
+                    </LinearLayout>
+                </ScrollView>
+
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
