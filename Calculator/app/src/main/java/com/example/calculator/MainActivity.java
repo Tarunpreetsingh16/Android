@@ -18,11 +18,12 @@ public class MainActivity extends AppCompatActivity {
             btnUndo,btnRedo,btnMultiply,btnAdd,btnSubtract,btnDivide,btnEqual,btnBackspace,btnNum0,btnClear;
 
     //textViews
-    TextView txtResult,txtInput;
+    TextView txtResult,txtInput,txtOperator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SharedFunctionality.setComputedCheck(true);
         //initialize variables on start up
         initializeViewData();
         //initialize click operations of the button
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 //set add operation and compute it
                 calculator.setOperation(new ConcatNumber());
                 calculator.doOperation("0");
-                UpdateView();
+                updateView();
             }
         });
         //when number 1 is clicked
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 //set add operation and compute it
                 calculator.setOperation(new ConcatNumber());
                 calculator.doOperation("1");
-                UpdateView();
+                updateView();
             }
         });
 
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 //set add operation and compute it
                 calculator.setOperation(new ConcatNumber());
                 calculator.doOperation("2");
-                UpdateView();
+                updateView();
             }
         });
 
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 //set add operation and compute it
                 calculator.setOperation(new ConcatNumber());
                 calculator.doOperation("3");
-                UpdateView();
+                updateView();
             }
         });
 
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 //set add operation and compute it
                 calculator.setOperation(new ConcatNumber());
                 calculator.doOperation("4");
-                UpdateView();
+                updateView();
             }
         });
 
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 //set add operation and compute it
                 calculator.setOperation(new ConcatNumber());
                 calculator.doOperation("5");
-                UpdateView();
+                updateView();
             }
         });
         //when number 6 is clicked
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 //set add operation and compute it
                 calculator.setOperation(new ConcatNumber());
                 calculator.doOperation("6");
-                UpdateView();
+                updateView();
             }
         });
         //when number 7 is clicked
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 //set add operation and compute it
                 calculator.setOperation(new ConcatNumber());
                 calculator.doOperation("7");
-                UpdateView();
+                updateView();
             }
         });
         //when number 8 is clicked
@@ -134,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 //set add operation and compute it
                 calculator.setOperation(new ConcatNumber());
                 calculator.doOperation("8");
-                UpdateView();
+                updateView();
             }
         });
         //when number 9 is clicked
@@ -145,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                 //set add operation and compute it
                 calculator.setOperation(new ConcatNumber());
                 calculator.doOperation("9");
-                UpdateView();
+                updateView();
             }
         });
         //when decimal "." is clicked
@@ -156,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 //set add operation and compute it
                 calculator.setOperation(new ConcatNumber());
                 calculator.doOperation(".");
-                UpdateView();
+                updateView();
             }
         });
         //when decimal "." is clicked
@@ -167,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                 //set add operation and compute it
                 calculator.setOperation(new ClearOperation());
                 calculator.doOperation(".");
-                UpdateView();
+                updateView();
             }
         });
         //when add is clicked
@@ -178,6 +179,8 @@ public class MainActivity extends AppCompatActivity {
                 //set add operation and compute it
                 calculator.setOperation(new AddOperation());
                 calculator.doOperation(null);
+                updateView();
+                updateOperator();
             }
         });
         //when multiply is clicked
@@ -188,6 +191,8 @@ public class MainActivity extends AppCompatActivity {
                 //set multiply operation and compute it
                 calculator.setOperation(new MultiplyOperation());
                 calculator.doOperation(null);
+                updateView();
+                updateOperator();
             }
         });
         //when divide is clicked
@@ -198,6 +203,8 @@ public class MainActivity extends AppCompatActivity {
                 //set divide operation and compute it
                 calculator.setOperation(new DivideOperation());
                 calculator.doOperation(null);
+                updateView();
+                updateOperator();
             }
         });
         //when subtract is clicked
@@ -208,13 +215,67 @@ public class MainActivity extends AppCompatActivity {
                 //set subtract operation and compute it
                 calculator.setOperation(new SubtractOperation());
                 calculator.doOperation(null);
+                updateView();
+                updateOperator();
+            }
+        });
+        //when equal/compute is clicked
+        btnEqual.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                //set subtract operation and compute it
+                calculator.setOperation(new ComputeOperation());
+                calculator.doOperation(null);
+                updateView();
+                updateOperator();
+            }
+        });
+        //when equal/compute is clicked
+        btnBackspace.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                //set subtract operation and compute it
+                calculator.setOperation(new BackSpace());
+                calculator.doOperation(null);
+                updateView();
+                updateOperator();
+            }
+        });
+        //when equal/compute is clicked
+        btnUndo.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                //set subtract operation and compute it
+                calculator.setOperation(new UndoOperation());
+                calculator.doOperation(null);
+                updateView();
+                txtOperator.setText(" ");
+            }
+        });
+        //when equal/compute is clicked
+        btnRedo.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                //set subtract operation and compute it
+                calculator.setOperation(new RedoOperation());
+                calculator.doOperation(null);
+                updateView();
+                txtOperator.setText(" ");
             }
         });
     }
 
-    private void UpdateView() {
+    private void updateView() {
         txtInput.setText(SharedFunctionality.getInputNumberString());
         txtResult.setText(SharedFunctionality.getResultString());
+        txtOperator.setText(String.valueOf(SharedFunctionality.getOperator()));
+    }
+    private void updateOperator(){
+        txtOperator.setText(String.valueOf(SharedFunctionality.getOperator()));
     }
 
     //initialize variables
@@ -241,6 +302,6 @@ public class MainActivity extends AppCompatActivity {
         btnClear = findViewById(R.id.btnClear);
         txtResult = findViewById(R.id.txtResult);
         txtInput = findViewById(R.id.txtInput);
-
+        txtOperator = findViewById(R.id.txtOperator);
     }
 }

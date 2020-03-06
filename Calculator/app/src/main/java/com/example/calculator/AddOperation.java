@@ -1,10 +1,18 @@
 package com.example.calculator;
 
-import android.util.Log;
-
 public class AddOperation extends Operation {
     @Override
     public void doOperation(String value) {
-        Log.i("info","+");
+        //check if there is a number
+        if(!SharedFunctionality.getInputNumberString().trim().equals(".") && SharedFunctionality.getComputedCheck()){
+            //Set the operator
+            SharedFunctionality.setOperator('+');
+
+            SharedFunctionality.setFirsNumber(Double.parseDouble(SharedFunctionality.getInputNumberString()));
+            //clear the number entered from the view
+            SharedFunctionality.clearInputString();
+            //set the computed check as false
+            SharedFunctionality.setComputedCheck(false);
+        }
     }
 }
