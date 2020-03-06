@@ -23,7 +23,6 @@
             android:fontFamily="@font/amiko_semibold"
             android:paddingTop="40dp"
             android:paddingRight="10dp"
-            android:text="0"
             android:textAlignment="textEnd"
             android:textColor="#B7FFFEFE"
             android:textSize="15sp" />
@@ -36,7 +35,6 @@
             android:background="@android:color/black"
             android:fontFamily="@font/amiko_semibold"
             android:padding="20dp"
-            android:text="0"
             android:textAlignment="textEnd"
             android:textColor="#FFFFFF"
             android:textSize="20sp"

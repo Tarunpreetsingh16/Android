@@ -15,7 +15,7 @@ public class Calculator extends CalculatorAbstraction {
     }
 
     @Override
-    public void doOperation() {
-        operation.doOperation();
+    public void doOperation(String value) {
+        operation.doOperation(value);
     }
 }

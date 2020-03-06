@@ -16,9 +16,9 @@ public class MainActivity extends AppCompatActivity {
     //buttons
     Button btnNum1,btnNum2,btnNum3,btnNum4,btnNum5,btnNum6,btnNum7,btnNum8,btnNum9,btnDecimal,
             btnUndo,btnRedo,btnMultiply,btnAdd,btnSubtract,btnDivide,btnEqual,btnBackspace,btnNum0,btnClear;
+
     //textViews
     TextView txtResult,txtInput;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,30 +33,143 @@ public class MainActivity extends AppCompatActivity {
     private void initializeClickOperations() {
 
         final CalculatorAbstraction calculator = Calculator.getInstance();
-        /*//when button 0 is clicked
+
+        //when number 0 is clicked
         btnNum0.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
-
+                //set add operation and compute it
+                calculator.setOperation(new ConcatNumber());
+                calculator.doOperation("0");
+                UpdateView();
             }
         });
-        //when button 0 is clicked
+        //when number 1 is clicked
         btnNum1.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
-
+                //set add operation and compute it
+                calculator.setOperation(new ConcatNumber());
+                calculator.doOperation("1");
+                UpdateView();
             }
         });
-        //when button 0 is clicked
+
+        //when number 2 is clicked
         btnNum2.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
-
+                //set add operation and compute it
+                calculator.setOperation(new ConcatNumber());
+                calculator.doOperation("2");
+                UpdateView();
             }
-        });*/
+        });
+
+        //when number 3 is clicked
+        btnNum3.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                //set add operation and compute it
+                calculator.setOperation(new ConcatNumber());
+                calculator.doOperation("3");
+                UpdateView();
+            }
+        });
+
+        //when number 4 is clicked
+        btnNum4.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                //set add operation and compute it
+                calculator.setOperation(new ConcatNumber());
+                calculator.doOperation("4");
+                UpdateView();
+            }
+        });
+
+        //when number 5 is clicked
+        btnNum5.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                //set add operation and compute it
+                calculator.setOperation(new ConcatNumber());
+                calculator.doOperation("5");
+                UpdateView();
+            }
+        });
+        //when number 6 is clicked
+        btnNum6.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                //set add operation and compute it
+                calculator.setOperation(new ConcatNumber());
+                calculator.doOperation("6");
+                UpdateView();
+            }
+        });
+        //when number 7 is clicked
+        btnNum7.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                //set add operation and compute it
+                calculator.setOperation(new ConcatNumber());
+                calculator.doOperation("7");
+                UpdateView();
+            }
+        });
+        //when number 8 is clicked
+        btnNum8.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                //set add operation and compute it
+                calculator.setOperation(new ConcatNumber());
+                calculator.doOperation("8");
+                UpdateView();
+            }
+        });
+        //when number 9 is clicked
+        btnNum9.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                //set add operation and compute it
+                calculator.setOperation(new ConcatNumber());
+                calculator.doOperation("9");
+                UpdateView();
+            }
+        });
+        //when decimal "." is clicked
+        btnDecimal.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                //set add operation and compute it
+                calculator.setOperation(new ConcatNumber());
+                calculator.doOperation(".");
+                UpdateView();
+            }
+        });
+        //when decimal "." is clicked
+        btnClear.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                //set add operation and compute it
+                calculator.setOperation(new ClearOperation());
+                calculator.doOperation(".");
+                UpdateView();
+            }
+        });
         //when add is clicked
         btnAdd.setOnClickListener(new View.OnClickListener(){
 
@@ -64,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //set add operation and compute it
                 calculator.setOperation(new AddOperation());
-                calculator.doOperation();
+                calculator.doOperation(null);
             }
         });
         //when multiply is clicked
@@ -74,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //set multiply operation and compute it
                 calculator.setOperation(new MultiplyOperation());
-                calculator.doOperation();
+                calculator.doOperation(null);
             }
         });
         //when divide is clicked
@@ -84,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //set divide operation and compute it
                 calculator.setOperation(new DivideOperation());
-                calculator.doOperation();
+                calculator.doOperation(null);
             }
         });
         //when subtract is clicked
@@ -94,9 +207,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //set subtract operation and compute it
                 calculator.setOperation(new SubtractOperation());
-                calculator.doOperation();
+                calculator.doOperation(null);
             }
         });
+    }
+
+    private void UpdateView() {
+        txtInput.setText(SharedFunctionality.getInputNumberString());
+        txtResult.setText(SharedFunctionality.getResultString());
     }
 
     //initialize variables
@@ -123,5 +241,6 @@ public class MainActivity extends AppCompatActivity {
         btnClear = findViewById(R.id.btnClear);
         txtResult = findViewById(R.id.txtResult);
         txtInput = findViewById(R.id.txtInput);
+
     }
 }

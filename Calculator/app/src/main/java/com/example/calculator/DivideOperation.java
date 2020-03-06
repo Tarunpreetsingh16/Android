@@ -4,7 +4,7 @@ import android.util.Log;
 
 public class DivideOperation extends Operation {
     @Override
-    public void doOperation() {
+    public void doOperation(String value) {
         Log.i("info","/");
     }
 }

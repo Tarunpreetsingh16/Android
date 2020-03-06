@@ -4,7 +4,7 @@ import android.util.Log;
 
 public class SubtractOperation extends Operation {
     @Override
-    public void doOperation() {
+    public void doOperation(String value) {
         Log.i("info","-");
     }
 }
