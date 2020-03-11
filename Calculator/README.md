@@ -15,9 +15,11 @@ For Undo and Redo I used Stack to store the results of the operations.
 Screenshots of the application - 
 Figure 1
 Landing screen of the application
+
 ![Landing screen of the application](https://github.com/Tarunpreetsingh16/Android/blob/master/Calculator/images/Screenshot_20200306_163855_com.example.calculator.jpg)
 
 Figure 2
 When user enters the input, it updates the screen
+
 ![When user enters the input, it updates the screen](https://github.com/Tarunpreetsingh16/Android/blob/master/Calculator/images/Screenshot_20200306_163907_com.example.calculator.jpg)
 
