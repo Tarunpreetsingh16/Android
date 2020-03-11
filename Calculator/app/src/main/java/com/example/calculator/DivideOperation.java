@@ -8,7 +8,6 @@ public class DivideOperation extends Operation {
         if(!SharedFunctionality.getInputNumberString().trim().equals(".") && SharedFunctionality.getComputedCheck()){
             //Set the operator
             SharedFunctionality.setOperator('/');
-
             SharedFunctionality.setFirsNumber(Double.parseDouble(SharedFunctionality.getInputNumberString()));
             //clear the number entered from the view
             SharedFunctionality.clearInputString();
