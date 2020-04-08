@@ -4,6 +4,9 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initializeElements();
+        loadFragment(new EnterGrade());
     }
 
     private void initializeElements() {
@@ -29,5 +33,15 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.setDrawerIndicatorEnabled(true);
         drawerToggle.syncState();
+    }
+    private void loadFragment(Fragment fragment){
+        //create fragment manager
+        FragmentManager fmanager = getSupportFragmentManager();
+        //create transaction to replace the fragment
+        FragmentTransaction ftrans = fmanager.beginTransaction();
+        //replace the framelayout with new fragment
+        ftrans.replace(R.id.fragment,fragment);
+        //commit the transaction/replace the fragment
+        ftrans.commit();
     }
 }

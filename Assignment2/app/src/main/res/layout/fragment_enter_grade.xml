@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EnterGrade">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.33"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtFirstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Firstname"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/editFirstName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lastname"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/editLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtMarks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Marks"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/editMarks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.33"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtCourses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="Course"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp" />
+
+                <ListView
+                    android:id="@+id/listCourses"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+
+                </ListView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.33"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtCredit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="Credit"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp" />
+
+                <RadioGroup
+                    android:id="@+id/rgCredit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RadioButton
+                        android:id="@+id/rb1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="3"
+                        android:textSize="18sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="4"
+                        android:textSize="18sp" />
+                </RadioGroup>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
