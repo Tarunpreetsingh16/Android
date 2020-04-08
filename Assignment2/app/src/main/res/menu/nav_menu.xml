@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/gradeEntry"
+        android:icon="@drawable/create_icon"
+        android:title="Grade Entry"/>
+    <item
+        android:id="@+id/viewGrade"
+        android:icon="@drawable/view_icon"
+        android:title="View Grades"/>
+    <item
+        android:id="@+id/searchGrades"
+        android:icon="@drawable/search_icon"
+        android:title="Search"/>
+    <item
+        android:id="@+id/updateGrade"
+        android:icon="@drawable/update_icon"
+        android:title="Update"/>
+    <item
+        android:id="@+id/deleteGrade"
+        android:icon="@drawable/delete_icon"
+        android:title="Delete"/>
+</menu>
