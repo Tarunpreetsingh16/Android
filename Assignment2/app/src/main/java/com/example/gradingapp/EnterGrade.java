@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,8 +41,8 @@ public class EnterGrade extends Fragment {
     String course;
     int credit;
     RadioGroup rgCredit;
-    //create database instance
-    SQLiteDatabase db;
+    SqlDatabase database;
+
     public EnterGrade() {
         // Required empty public constructor
     }
@@ -73,6 +74,7 @@ public class EnterGrade extends Fragment {
         rgCredit.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                //check which credit butotn has been checked
                 switch (i){
                     case R.id.rb1:
                         credit = 1;
@@ -119,9 +121,22 @@ public class EnterGrade extends Fragment {
                     flag = false;
                 }
                 if(flag){
-                    Toast.makeText(getContext(),"True",Toast.LENGTH_SHORT).show();
+                    try {
+                        //otherwise update the database
+                        database.getDb().execSQL("INSERT INTO grades(firstName,lastName,marks,course,credit) VALUES(\"" +
+                                editFirstName.getText().toString() + "\",\"" +
+                                editLastName.getText().toString() + "\"," +
+                                Integer.parseInt(marks.getText().toString() )+ ",\"" +
+                                course.toString() + "\"," +
+                                credit + ")");
+                        Toast.makeText(getContext(), "Record added!", Toast.LENGTH_SHORT).show();
+                    }
+                    catch (Exception e){
+                        Log.i("info",e.getMessage());
+                    }
                 }
                 else{
+                    //if any details were missing
                     Toast.makeText(getContext(),"Enter Data!",Toast.LENGTH_SHORT).show();
                 }
             }
@@ -152,6 +167,7 @@ public class EnterGrade extends Fragment {
         submit = view.findViewById(R.id.btnSubmit);
         rgCredit = view.findViewById(R.id.rgCredit);
         courseSelected = view.findViewById(R.id.txtCourseCode);
+        database = (SqlDatabase) getArguments().getSerializable("database");
     }
 
 }

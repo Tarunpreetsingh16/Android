@@ -19,13 +19,15 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private Toolbar toolbar;
 
     //create database instance
-    SQLiteDatabase db;
+    SqlDatabase database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +40,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeDatabase() {
         //try creating database if not already created
-        db = openOrCreateDatabase("Grades", Context.MODE_PRIVATE,null);
+        database.setDb(openOrCreateDatabase("Grades", Context.MODE_PRIVATE,null));
+
         //try creating table in the database if it doesn't exist
-        db.execSQL("CREATE TABLE IF NOT EXISTS grades(" +
+        database.getDb().execSQL("CREATE TABLE IF NOT EXISTS grades(" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "firstName TEXT," +
                 "lastName TEXT," +
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeElements() {
+        database = new SqlDatabase();
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.nav_drawer);
@@ -90,6 +94,10 @@ public class MainActivity extends AppCompatActivity {
         drawerToggle.syncState();
     }
     private void loadFragment(Fragment fragment){
+        //attach data to pass
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("database",database);
+        fragment.setArguments(bundle);
         //create fragment manager
         FragmentManager fmanager = getSupportFragmentManager();
         //create transaction to replace the fragment

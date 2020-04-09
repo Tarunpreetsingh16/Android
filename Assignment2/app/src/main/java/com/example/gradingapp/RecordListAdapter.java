@@ -1,6 +1,7 @@
 package com.example.gradingapp;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +9,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecordListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
@@ -50,11 +49,11 @@ public class RecordListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         RecordsAdapter recordsAdapter = records.get(position);
-        ((ViewHolder) holder).txtId.setText(recordsAdapter.getId());
+        ((ViewHolder) holder).txtId.setText(String.valueOf(recordsAdapter.getId()));
         ((ViewHolder) holder).txtFirstName.setText(recordsAdapter.getFirstName());
         ((ViewHolder) holder).txtLastName.setText(recordsAdapter.getLastName());
-        ((ViewHolder) holder).txtMarks.setText(recordsAdapter.getMarks());
-        ((ViewHolder) holder).txtCredit.setText(recordsAdapter.getCredit());
+        ((ViewHolder) holder).txtMarks.setText(String.valueOf(recordsAdapter.getMarks()));
+        ((ViewHolder) holder).txtCredit.setText(String.valueOf(recordsAdapter.getCredit()));
         ((ViewHolder) holder).txtCourse.setText(recordsAdapter.getCourse());
     }
 

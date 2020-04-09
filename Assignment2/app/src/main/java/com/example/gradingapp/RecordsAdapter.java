@@ -10,8 +10,8 @@ public class RecordsAdapter {
 
     //getters and setters
     public void setId(int id){this.id = id;}
-    public void setFirstName(String FirstName){this.firstName= firstName;}
-    public void setLastName(String LastName){this.lastName= lastName;}
+    public void setFirstName(String firstName){this.firstName= firstName;}
+    public void setLastName(String lastName){this.lastName= lastName;}
     public void setMarks(int marks){this.marks = marks;}
     public void setCredit(int credit){this.credit = credit;}
     public void setCourse(String course){this.course = course;}
