@@ -36,7 +36,6 @@ public class EnterGrade extends Fragment {
     EditText marks;
     ListView courseList;
     Button submit;
-    List<String> courses;
     TextView courseSelected;
     String course;
     int credit;
@@ -60,8 +59,8 @@ public class EnterGrade extends Fragment {
     private void intializeFragment(View view) {
         //initialize variables
         initializeVariables(view);
-        //setup courses list
-        addCoursesToList(view);
+        //set adapter for course list
+        SharedFunctionality.setAdapter(getContext(),courseList);
         //setup course selection
         setupCourseSelection();
         //setup radio button group to get the credit
@@ -100,7 +99,8 @@ public class EnterGrade extends Fragment {
         courseList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                course = courses.get(i);
+                //get the course selected by the user and display it on the screen
+                course = SharedFunctionality.getCourse(i);
                 courseSelected.setText(course);
             }
         });
@@ -143,21 +143,7 @@ public class EnterGrade extends Fragment {
         });
     }
 
-    private void addCoursesToList(View view) {
-        //create list of courses
-        courses = new ArrayList<String>();
-        courses.add(getString(R.string.PROG8450));
-        courses.add(getString(R.string.PROG8460));
-        courses.add(getString(R.string.PROG8470));
-        courses.add(getString(R.string.PROG8480));
-        //crete array adapter to attach it to the listview
-        ArrayAdapter<String> courseAdapter = new ArrayAdapter<String>(
-                view.getContext(),
-                android.R.layout.simple_list_item_1,
-                courses);
-        //attach the adapter to the list view
-        courseList.setAdapter(courseAdapter);
-    }
+
 
     private void initializeVariables(View view) {
         editFirstName = view.findViewById(R.id.editFirstName);
