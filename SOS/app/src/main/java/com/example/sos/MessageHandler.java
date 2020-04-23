@@ -20,6 +20,7 @@ public class MessageHandler {
         SmsManager smsManager = SmsManager.getDefault();
         //loop through locations
         ArrayList<String> message = new ArrayList<>();
+        message.add("I don't feel safe. These were my last 2 locations ->");
         for(int i = 0;i<locations.size();i++){
             message.add(locations.get(i).getAddress());
         }

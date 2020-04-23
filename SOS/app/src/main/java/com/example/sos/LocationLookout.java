@@ -52,7 +52,7 @@ class LocationLookout implements android.location.LocationListener {
             locationDetails.setAddress(String.valueOf(addresses.get(0).getAddressLine(0)));
 
             if(dbs.insertLocation(locationDetails)){
-                Toast.makeText(context,"Inserted",Toast.LENGTH_LONG).show();
+                Toast.makeText(context,"Located captured!",Toast.LENGTH_LONG).show();
             }
             else{
                 Toast.makeText(context,"Insertion failed!",Toast.LENGTH_LONG).show();

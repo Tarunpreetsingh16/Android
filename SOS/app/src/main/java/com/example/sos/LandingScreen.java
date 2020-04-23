@@ -3,10 +3,7 @@ package com.example.sos;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -14,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 public class LandingScreen extends AppCompatActivity {
     Button btnAccessLocation ;
@@ -36,7 +32,6 @@ public class LandingScreen extends AppCompatActivity {
         decisionMaker();
         //attach on click functionalities to the buttons
         setupButtons();
-//        setupSelectContact();
     }
 
     private void setupButtons() {

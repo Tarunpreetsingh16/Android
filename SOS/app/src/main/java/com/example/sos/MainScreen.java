@@ -12,8 +12,10 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -57,6 +59,8 @@ public class MainScreen extends AppCompatActivity {
     List<Contact> contacts;
     SharedPreferences.Editor editor;
     Gson gson;
+    boolean checkVolumneDown = false;
+
     //    //create location manager to fetch location of the user
     private LocationManager locationManager = null;
     //set location listeners for gps and network both
@@ -88,16 +92,32 @@ public class MainScreen extends AppCompatActivity {
         currentAcceleration = SensorManager.GRAVITY_EARTH;
         lastAcceleration = SensorManager.GRAVITY_EARTH;
     }
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event){
-//        if(keyCode == KeyEvent.KEYCODE_VOLUME_UP)
-//    }
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        int action = event.getAction();
+        int keyCode = event.getKeyCode();
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                if (action == KeyEvent.ACTION_DOWN) {
+                    //set check to true
+                    checkVolumneDown = true;
+                }
+                else if(action == KeyEvent.ACTION_UP){
+                    //set check to false
+                    checkVolumneDown = false;
+                }
+                return true;
+            default:
+                return super.dispatchKeyEvent(event);
+        }
+    }
     //creating event of the accelerometer
     private final SensorEventListener sensorListener = new SensorEventListener(){
 
         @Override
         public void onSensorChanged(SensorEvent sensorEvent) {
             List<LocationDetails> locationDetails = new ArrayList<LocationDetails>();
+
             //fetch x y z values of the accelerometer
             float x = sensorEvent.values[0];
             float y = sensorEvent.values[1];
@@ -109,7 +129,7 @@ public class MainScreen extends AppCompatActivity {
             //find the difference between last and current acceleration
             float delta = currentAcceleration - lastAcceleration;
             acceleration = acceleration * 0.9f +delta;
-            if(acceleration > 30){
+            if(acceleration > 55 && checkVolumneDown){
                 try {
                     DatabaseHandler dbh = new DatabaseHandler(MainScreen.this);
                     Cursor crs = dbh.getData();
@@ -171,7 +191,7 @@ public class MainScreen extends AppCompatActivity {
             else {
                 //if yes then fetch from GPS
                 locationManager.requestLocationUpdates(
-                        LocationManager.NETWORK_PROVIDER, 20000, 30f,
+                        LocationManager.NETWORK_PROVIDER, 20000, 40f,
                         locations[1]);
             }
         } catch (Exception e){
@@ -180,7 +200,7 @@ public class MainScreen extends AppCompatActivity {
         try {
             //fetch from network
             locationManager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER, 20000, 30f,
+                    LocationManager.GPS_PROVIDER, 20000, 40f,
                     locations[0]);
         } catch (Exception e){
             e.printStackTrace();
