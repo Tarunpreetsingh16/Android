@@ -12,7 +12,7 @@
         android:id="@+id/infoViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.2">
+        android:layout_weight="0.1">
 
     </androidx.viewpager.widget.ViewPager>
 
@@ -20,14 +20,35 @@
         android:id="@+id/linearInfoScreenTab"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.8"
+        android:layout_weight="0.9"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
+            android:id="@+id/btnPrevious"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Button" />
+            android:layout_weight="0.33"
+            android:background="@color/colorAccent"
+            android:text="Previous"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.33"
+            android:orientation="horizontal"
+            android:id="@+id/linearDots"
+            android:gravity="center">
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.33"
+            android:text="Button"
+            android:background="@color/colorAccent"
+            android:textColor="@color/colorPrimaryDark"  />
     </LinearLayout>
 </LinearLayout>
