@@ -27,7 +27,7 @@ public class LandingScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.landing_screen);
 
-        //intialize variables and setup button functionality
+        //initialize variables and setup button functionality
         initializeData();
         //check if required access is provided
         checkAccess();
@@ -86,39 +86,6 @@ public class LandingScreen extends AppCompatActivity {
         btnAccessLocation = findViewById(R.id.btnAccessLocation);
         permissionHandler = new PermissionHandler(this);
     }
-//    private void setupSelectContact() {
-//        //when select contact button is selected
-//        btnContactSelection.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //initialize contact selection process
-//                //check if permission is granted
-//                if(ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED){
-//                    pickContact();
-//                }
-//                else
-//                {//if not granted then request for permission
-//                    permissionHandler.requestPersmission();
-//                }
-//            }
-//        });
-//    }
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        //check the result code
-//        if(requestCode == 1 && resultCode == RESULT_OK){
-//            ContactsHandler handler = new ContactsHandler(this);
-//            String contactData[] = handler.getContactDetails(data.getData());
-//
-//        }
-//    }
-
-//    public void pickContact(){
-//        Intent contactPicker = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
-//        startActivityForResult(contactPicker,1);
-//    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
