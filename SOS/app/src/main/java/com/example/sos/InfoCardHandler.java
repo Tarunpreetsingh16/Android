@@ -1,8 +1,12 @@
 package com.example.sos;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.text.Html;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,7 +25,11 @@ public class InfoCardHandler {
     private View view;
     private Context context;
     private LinearLayout linearDots;
+    private Button btnPrevious;
+    private Button btnNext;
 
+    //declare global variables
+    private int currentCardNumber = 0;
     //declare constants
     final int bullet_size = 40;
 
@@ -31,6 +39,9 @@ public class InfoCardHandler {
         this.context = context;
         infoViewPager = view.findViewById(R.id.infoViewPager);
         linearDots = view.findViewById(R.id.linearDots);
+        //initialize Buttons
+        btnNext = view.findViewById(R.id.btnNext);
+        btnPrevious= view.findViewById(R.id.btnPrevious);
     }
 
     private void syncDots(int currentCardPosition) {
@@ -99,6 +110,22 @@ public class InfoCardHandler {
         @Override
         public void onPageSelected(int position) {
             syncDots(position);
+            //store current card position to use it in button functionality
+            currentCardNumber = position;
+            //check which page is selected then change the attributes of buttons
+            if(position == 0){//when first info card is being displayed
+                btnPrevious.setVisibility(View.INVISIBLE);
+                btnNext.setText(R.string.next);
+            }
+            //when last is being displayed
+            else if(position == infoAdapters.size() - 1){
+                btnPrevious.setVisibility(View.VISIBLE);
+                btnNext.setText(R.string.finish);
+            }
+            else{
+                btnPrevious.setVisibility(View.VISIBLE);
+                btnNext.setText(R.string.next);
+            }
         }
 
         @Override
@@ -106,4 +133,37 @@ public class InfoCardHandler {
 
         }
     };
+    public void setupSupplementary(){
+        //when next button is clicked
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //if not on last info card
+                if(btnNext.getText() == context.getString(R.string.next)){
+                    infoViewPager.setCurrentItem(currentCardNumber + 1);
+                }
+                else{
+                    //store that app has already been launched previously
+                    SharedPreferences sharedPref = context.getSharedPreferences(
+                            context.getString(R.string.app_pref), Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putBoolean(context.getString(R.string.first_launch_check),true);
+                    editor.commit();
+                    //this is used to stop showing info screen again and again
+                    //go to next screen
+                    Intent landingScreen = new Intent(context,LandingScreen.class);
+                    landingScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(landingScreen);
+                    ((Activity)context).finish();
+                }
+            }
+        });
+        //when previous button is clicked
+        btnPrevious.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                infoViewPager.setCurrentItem(currentCardNumber - 1);
+            }
+        });
+    }
 }

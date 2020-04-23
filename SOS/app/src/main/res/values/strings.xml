@@ -9,4 +9,13 @@
     <string name="contact_info_subtitle">Just sync and select the top three contacts</string>
     <string name="shake_info_subtitle">Just hold the volume down button and shake 3 times</string>
 
+    //info screen buttons strings
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="finish">Finish</string>
+
+    //for shared preferences
+    <string name="first_launch_check">Already launched</string>
+    <string name="app_pref">Application Preferences</string>
+
 </resources>

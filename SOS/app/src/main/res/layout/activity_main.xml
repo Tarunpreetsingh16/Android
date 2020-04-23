@@ -21,16 +21,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.9"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="15dp">
 
         <Button
             android:id="@+id/btnPrevious"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.33"
-            android:background="@color/colorAccent"
+            android:background="@color/colorPrimaryDark"
             android:text="Previous"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@color/colorAccent"
+            android:visibility="invisible"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,8 +49,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.33"
-            android:text="Button"
-            android:background="@color/colorAccent"
-            android:textColor="@color/colorPrimaryDark"  />
+            android:text="@string/next"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/colorAccent"  />
     </LinearLayout>
 </LinearLayout>
