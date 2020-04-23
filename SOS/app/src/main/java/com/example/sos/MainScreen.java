@@ -1,7 +1,16 @@
 package com.example.sos;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -16,12 +25,18 @@ import com.google.gson.reflect.TypeToken;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MainScreen extends AppCompatActivity {
+    private SensorManager sensorManager;
+    private float acceleration;
+    private float currentAcceleration;
+    private float lastAcceleration;
     ImageButton btnFirstAdd;
     ImageButton btnSecondAdd;
     ImageButton btnThirdAdd;
@@ -42,16 +57,134 @@ public class MainScreen extends AppCompatActivity {
     List<Contact> contacts;
     SharedPreferences.Editor editor;
     Gson gson;
+    //    //create location manager to fetch location of the user
+    private LocationManager locationManager = null;
+    //set location listeners for gps and network both
+    LocationLookout[] locations = new LocationLookout[]{
+            new LocationLookout(LocationManager.NETWORK_PROVIDER,this),
+            new LocationLookout(LocationManager.GPS_PROVIDER,this)};
 
     SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
+        startLocationServices();
         getSupportActionBar().hide();
         initializeData();
         //setup select contact functionality for all 3 contacts
         setupSelectContact();
+        setupShakeFeature();
+    }
+
+    private void setupShakeFeature() {
+        //setup  shake feature to send the message
+        sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+        //get accelerometer sensor of the mobile
+        Objects.requireNonNull(sensorManager).registerListener(sensorListener,sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_NORMAL);
+        acceleration = 10f;
+        //store previous acceleration to match if phone is really shaking or not
+        currentAcceleration = SensorManager.GRAVITY_EARTH;
+        lastAcceleration = SensorManager.GRAVITY_EARTH;
+    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event){
+//        if(keyCode == KeyEvent.KEYCODE_VOLUME_UP)
+//    }
+    //creating event of the accelerometer
+    private final SensorEventListener sensorListener = new SensorEventListener(){
+
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            List<LocationDetails> locationDetails = new ArrayList<LocationDetails>();
+            //fetch x y z values of the accelerometer
+            float x = sensorEvent.values[0];
+            float y = sensorEvent.values[1];
+            float z = sensorEvent.values[2];
+            //store last acceleration
+            lastAcceleration = currentAcceleration;
+            //find interpolation of the acceleration
+            currentAcceleration = (float) Math.sqrt((double)(x*x + y*y + z*z));
+            //find the difference between last and current acceleration
+            float delta = currentAcceleration - lastAcceleration;
+            acceleration = acceleration * 0.9f +delta;
+            if(acceleration > 30){
+                try {
+                    DatabaseHandler dbh = new DatabaseHandler(MainScreen.this);
+                    Cursor crs = dbh.getData();
+                    if (crs != null) {
+                        crs.moveToFirst();
+                        while (crs.moveToNext()) {
+                            Log.i("counter", String.valueOf(crs.getCount()));
+                            LocationDetails locationDetail = new LocationDetails();
+                            locationDetail.setLongitude(crs.getString(crs.getColumnIndex("longitude")));
+                            locationDetail.setLatitude(crs.getString(crs.getColumnIndex("latitude")));
+                            locationDetail.setCountry(crs.getString(crs.getColumnIndex("country")));
+                            locationDetail.setLocality(crs.getString(crs.getColumnIndex("locality")));
+                            locationDetail.setAddress(crs.getString(crs.getColumnIndex("address")));
+                            locationDetail.setDate(crs.getString(crs.getColumnIndex("date")));
+                            //add it to the list
+                            locationDetails.add(locationDetail);
+                        }
+                        MessageHandler messageHandler = new MessageHandler();
+                        //no contacts on list
+                        if (contacts.size() < 1) {
+                            Toast.makeText(MainScreen.this,"Add contacts first!",Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        messageHandler.sendMessages(locationDetails,contacts);
+                        Toast.makeText(MainScreen.this,"Alert Sent!",Toast.LENGTH_LONG).show();
+                    }
+                }
+                catch(Exception e){
+                    Log.i("Message",e.getMessage());
+                }
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {}
+    };
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(sensorListener);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener(sensorListener,sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    private void startLocationServices() {
+        initializeLocationManager();
+        try {
+            //check if user granted the permission
+            if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                //start requesting location update from the manager
+                Log.i("Info","No permission granted!");
+            }
+            else {
+                //if yes then fetch from GPS
+                locationManager.requestLocationUpdates(
+                        LocationManager.NETWORK_PROVIDER, 20000, 30f,
+                        locations[1]);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        try {
+            //fetch from network
+            locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER, 20000, 30f,
+                    locations[0]);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void initializeData() {
@@ -75,6 +208,16 @@ public class MainScreen extends AppCompatActivity {
         editor = sharedPreferences.edit();
         gson = new Gson();
         setContactList();
+
+    }
+    private void initializeLocationManager() {
+        try {
+            if (locationManager == null) {
+                locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void setContactList() {

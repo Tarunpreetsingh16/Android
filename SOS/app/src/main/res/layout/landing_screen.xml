@@ -24,11 +24,25 @@
         android:layout_above="@+id/btnAccessContacts"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="46dp"
-        android:layout_marginEnd="65dp"
-        android:layout_marginBottom="93dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="67dp"
+        android:layout_marginBottom="62dp"
         android:background="@color/colorPrimaryDark"
         android:text="Allow access to location"
+        android:textColor="@color/colorAccent" />
+
+    <Button
+        android:id="@+id/btnAccessSms"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnAccessLocation"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="46dp"
+        android:layout_marginEnd="65dp"
+        android:layout_marginBottom="61dp"
+        android:background="@color/colorPrimaryDark"
+        android:text="Allow to send sms"
         android:textColor="@color/colorAccent" />
 
 

@@ -20,10 +20,29 @@ public class PermissionHandler extends  Activity{
     }
     //ask for contact permission
     public void requestContactPermission() {
-        ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.READ_CONTACTS},1);
+        try {
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_CONTACTS}, 1);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
     //ask for location permission
     public void requestLocationPermission() {
-        ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},2);
+        try {
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 2);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    //ask for location permission
+    public void requestSmsPermission() {
+        try {
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.SEND_SMS}, 3);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

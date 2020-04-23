@@ -19,8 +19,10 @@ import androidx.core.app.ActivityCompat;
 public class LandingScreen extends AppCompatActivity {
     Button btnAccessLocation ;
     Button btnAccessContacts;
+    Button btnAccessSMS;
     boolean contactsAccessCheck = true;
     boolean locationAccessCheck = true;
+    boolean smsAccessCheck = true;
     PermissionHandler permissionHandler;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +54,15 @@ public class LandingScreen extends AppCompatActivity {
                 permissionHandler.requestLocationPermission();
             }
         });
+        //ask for the sms access
+        btnAccessSMS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                permissionHandler.requestSmsPermission();
+            }
+        });
+
+
     }
 
     private void checkAccess() {
@@ -70,10 +81,18 @@ public class LandingScreen extends AppCompatActivity {
            locationAccessCheck = false;
            Toast.makeText(this,"Location Access is required!",Toast.LENGTH_SHORT).show();
        }
+//        //check if permission is provided by the user for sms
+
+        permission = Manifest.permission.SEND_SMS;
+        res = checkCallingOrSelfPermission(permission);
+        if(res != PackageManager.PERMISSION_GRANTED){
+           smsAccessCheck = false;
+           Toast.makeText(this,"Sending SMS is required!",Toast.LENGTH_SHORT).show();
+       }
     }
 
     private void decisionMaker(){
-        if(contactsAccessCheck && locationAccessCheck){
+        if(contactsAccessCheck && locationAccessCheck && smsAccessCheck){
             //go to next screen of the app
             Intent mainScreenIntent = new Intent(this,MainScreen.class);
             startActivity(mainScreenIntent);
@@ -84,6 +103,7 @@ public class LandingScreen extends AppCompatActivity {
     public void initializeData(){
         btnAccessContacts = findViewById(R.id.btnAccessContacts);
         btnAccessLocation = findViewById(R.id.btnAccessLocation);
+        btnAccessSMS = findViewById(R.id.btnAccessSms);
         permissionHandler = new PermissionHandler(this);
     }
 
@@ -100,6 +120,12 @@ public class LandingScreen extends AppCompatActivity {
             case 2:
                 if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     locationAccessCheck = true;
+                    decisionMaker();
+                }
+                break;
+            case 3:
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    smsAccessCheck = true;
                     decisionMaker();
                 }
         }
