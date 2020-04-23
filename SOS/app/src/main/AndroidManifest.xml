@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sos">
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -22,6 +23,9 @@
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".LandingScreen"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".MainScreen"
             android:screenOrientation="portrait">
         </activity>
     </application>

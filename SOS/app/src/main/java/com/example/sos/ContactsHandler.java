@@ -39,30 +39,22 @@ public class ContactsHandler {
     }
     private String getContactNumber(Uri data){
         //get contact id using cursor
-        Cursor crs = context.getContentResolver().query(data,new String[]{ContactsContract.Contacts._ID},null,null,null);
+        Cursor crs = context.getContentResolver().query(data,new String[]{ContactsContract.CommonDataKinds.Phone._ID},null,null,null);
         String id = null;
         //now move to the first record
         if(crs.moveToFirst()){
             //fetch contact id from the data
-            id = crs.getString((crs.getColumnIndex(ContactsContract.Contacts._ID)));
+            id = crs.getString((crs.getColumnIndex(ContactsContract.CommonDataKinds.Phone._ID)));
         }
         crs.close();
         if(id != null)
         {
             try {
                 //fetch number of from the contract using the id fetched
-                Cursor crsPhone = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                        null,
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ",
-                        id,
-                        null);
-                Log.i("GetCount",String.valueOf(crsPhone.getCount()));
+                Cursor crsPhone = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                        ContactsContract.CommonDataKinds.Phone._ID + " = ?", new String[]{id}, null);
                 //move the cursor to the first record
                 if (crsPhone.moveToFirst()) {
-
-                    Log.i("CheckNumber",crs.getString(crs.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));
-                    //Log.i("number",crs.getString(crs.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));
-                    //return the number that was fetched
                     return crsPhone.getString(crsPhone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                 }
                 crsPhone.close();
