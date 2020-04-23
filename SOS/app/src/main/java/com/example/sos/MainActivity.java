@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //check if app was already launched
         SharedPreferences preferences = getSharedPreferences(getString(R.string.app_pref),MODE_PRIVATE);
         boolean firstLaunchCheck = preferences.getBoolean(getString(R.string.first_launch_check),false);
