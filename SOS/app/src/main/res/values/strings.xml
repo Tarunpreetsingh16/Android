@@ -17,5 +17,6 @@
     //for shared preferences
     <string name="first_launch_check">Already launched</string>
     <string name="app_pref">Application Preferences</string>
+    <string name="contacts">Contacts</string>
 
 </resources>
